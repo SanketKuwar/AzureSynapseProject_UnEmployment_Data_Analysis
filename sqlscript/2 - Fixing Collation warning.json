@@ -1,0 +1,17 @@
+{
+	"name": "2 - Fixing Collation warning",
+	"properties": {
+		"content": {
+			"query": "\n\n\nselect [data].[Line Number],[data].[Month]\nFROM\nOPENROWSET(\nBULK 'abfss://raw@shkdatalake99.dfs.core.windows.net/Unemployment.csv',\nFORMAT = 'CSV',\nHEADER_ROW= TRUE,\nPARSER_VERSION = '2.0'\n)\nWITH(\n[Line Number] VARCHAR (10),\n[Month] VARCHAR (10)\n)as [data]\n\n\n-- CREATE DATABASE\n\nCREATE DATABASE ProjectDB\n\n-- CHANGE COLLATION FOR ENTIRE DATABASE\n\nALTER DATABASE ProjectDB\nCOLLATE Latin1_General_100_CI_AS_KS_SC_UTF8\n\n-- REEXECUTE\n\nselect [data].[Line Number],[data].[Month]\nFROM\nOPENROWSET(\nBULK 'abfss://raw@shkdatalake99.dfs.core.windows.net/Unemployment.csv',\nFORMAT = 'CSV',\nHEADER_ROW= TRUE,\nPARSER_VERSION = '2.0'\n)\nWITH(\n[Line Number] VARCHAR (10),\n[Month] VARCHAR (10)\n)as [data]\n\n\n\n\n\n\n\n\n\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "ProjectDB",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

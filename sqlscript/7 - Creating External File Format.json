@@ -1,0 +1,17 @@
+{
+	"name": "7 - Creating External File Format",
+	"properties": {
+		"content": {
+			"query": "-- This is auto-generated code\nSELECT\n    TOP 10 *\nFROM\n    OPENROWSET(\n        BULK 'https://shkdatalake99.dfs.core.windows.net/refined/ExtNew/0146577D-2E32-4502-A9E7-AEC4C08E8EE6_11_0-1.parquet',\n        FORMAT = 'PARQUET'\n    ) AS [result]\n\n    select * from Ext_Table\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "ProjectDB",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 1",
+	"properties": {
+		"content": {
+			"query": "-- Creating PARQUET FORMAT\n\nCREATE EXTERNAL FILE FORMAT parquet_format\nWITH(\n    FORMAT_TYPE = PARQUET,\n    DATA_COMPRESSION = 'org.apache.hadoop.io.compress.SnappyCodec'\n)\n\n\n-- External Data Source\n\nCREATE EXTERNAL DATA SOURCE refined_path\nWITH (\nLOCATION = 'abfss://refined@shkdatalake99.dfs.core.windows.net/'\n\n\n)\n\n\n-- Creating External Table \n\nCREATE EXTERNAL TABLE Ext_Table\nWITH (\nLOCATION = 'ExtNew',\nDATA_SOURCE = refined_path,\nFILE_FORMAT = parquet_format\n)\nAS SELECT [Line Number],[Year],[Month],[State],[Labor Force],[Employed],[Unemployed],[Unemployment Rate],[Industry],[Gender],[Education Level],[Date Inserted],[Aggregation Level],[Data Accuracy]\n\nFROM \nOPENROWSET (\nBULK 'abfss://raw@shkdatalake99.dfs.core.windows.net/Unemployment.csv',\nFORMAT = 'CSV',\nHEADER_ROW= TRUE,\nPARSER_VERSION = '2.0'\n) as [data]\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "ProjectDB",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

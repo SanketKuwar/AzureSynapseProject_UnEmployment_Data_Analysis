@@ -1,0 +1,17 @@
+{
+	"name": "1 - Data Exploration",
+	"properties": {
+		"content": {
+			"query": "select * FROM\nOPENROWSET(\nBULK 'https://shkdatalake99.dfs.core.windows.net/raw/Unemployment.csv',\nFORMAT = 'CSV',\nPARSER_VERSION = '2.0'\n\n\n) as [data]\n\n-- ABFSS\n\nselect [Line Number],[Year]\nFROM\nOPENROWSET(\nBULK 'abfss://raw@shkdatalake99.dfs.core.windows.net/Unemployment.csv',\nFORMAT = 'CSV',\nHEADER_ROW= TRUE,\nPARSER_VERSION = '2.0'\n) as [data]\n\n\n\n\n\nselect *\nFROM\nOPENROWSET(\nBULK 'abfss://raw@shkdatalake99.dfs.core.windows.net/Unemployment.psv',\nFORMAT = 'CSV',\nHEADER_ROW= TRUE,\nFIELDTERMINATOR= '|',\nPARSER_VERSION = '2.0'\n) as [data]\n\n\n\n\n\n\n\n\n\n\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "master",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

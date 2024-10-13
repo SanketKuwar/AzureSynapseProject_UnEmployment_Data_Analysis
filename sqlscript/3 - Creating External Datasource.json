@@ -1,0 +1,17 @@
+{
+	"name": "3 - Creating External Datasource",
+	"properties": {
+		"content": {
+			"query": "select [data].[Line Number],[data].[Month]\nFROM\nOPENROWSET(\nBULK 'Unemployment.csv',\nFORMAT = 'CSV',\nHEADER_ROW= TRUE,\nPARSER_VERSION = '2.0'\n)\nWITH(\n[Line Number] VARCHAR (10),\n[Month] VARCHAR (10)\n)as [data]\n\n-- Creating an External datasource\n\n\nCREATE EXTERNAL DATA SOURCE raw_container\nWITH(\n\nLOCATION = 'abfss://raw@shkdatalake99.dfs.core.windows.net/'\n\n\n)\n\n--Using  External Data Source\n\nselect [data].[Line Number],[data].[Month]\nFROM\nOPENROWSET(\nBULK 'Unemployment.csv',\nDATA_SOURCE = 'raw_container',\nFORMAT = 'CSV',\nHEADER_ROW= TRUE,\nPARSER_VERSION = '2.0'\n)\nWITH(\n[Line Number] VARCHAR (10),\n[Month] VARCHAR (10)\n)as [data]\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "ProjectDB",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
